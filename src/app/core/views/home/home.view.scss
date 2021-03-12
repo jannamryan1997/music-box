@@ -1,0 +1,52 @@
+@import 'src/my-theme.scss';
+@import '~@angular/material/theming';
+nz-layout {
+    background: none;
+}
+
+nz-header {
+    background: #070b10;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+    height: fit-content;
+    padding: 20px 5px;
+    z-index: 1;
+    position: relative;
+}
+
+i {
+    color: #00c0fa;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+nz-content {
+    background: #070b10;
+    width: 100%;
+    height: calc(100vh - 72px);
+}
+
+.response-header-content {
+    justify-content: flex-end;
+    i {
+        font-size: 30px;
+    }
+}
+
+.response-main {
+    padding: 5px 0;
+    position: absolute;
+    background: white;
+    height: fit-content;
+    width: 50%;
+    z-index: 9;
+    top: 70px;
+    bottom: 0;
+    right: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+    transition: all .5s ease-out;
+}
+
+.isAlternative {
+    background-color: mat-color($my-theme-primary) !important;
+}

@@ -1,0 +1,20 @@
+<div class="form-main">
+    <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
+        <img src="assets/images/logo.png" style="width: 130px;margin: 20px 0;">
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your username!">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input formControlName="userName" placeholder="Username" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input formControlName="password" placeholder="Password" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <button nz-button class="form-button login-form-margin form-type" [nzType]="'primary'" (click)="onClickLogin()">Log in</button>
+    </form>
+</div>
