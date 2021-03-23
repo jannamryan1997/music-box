@@ -6,6 +6,18 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./core/views/home/home.module').then(m => m.HomeModule),
+  },
+  {
+    path: 'main',
+    loadChildren: () => import('./core/views/main/main.module').then(m => m.MainModule),
+  },
+{
+    path: 'not-found',
+    loadChildren: () => import('./core/views/not-found/not-found.module').then(m => m.NotFoundModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./core/views/not-found/not-found.module').then(m => m.NotFoundModule)
   }
 ];
 

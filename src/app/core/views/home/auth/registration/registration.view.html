@@ -1,6 +1,7 @@
 <div class="form-main">
     <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
         <img src="assets/images/logo.png" style="width: 130px;margin: 20px 0;">
+        <p class="text-danger">{{errorMessage}}</p>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your username!">
                 <nz-input-group nzPrefixIcon="user">

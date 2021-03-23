@@ -1,0 +1,35 @@
+.trigger {
+    font-size: 30px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+nz-header {
+    background: #fff;
+    padding: 0;
+}
+
+nz-content {}
+
+.inner-content {
+    padding: 24px;
+    background: #fff;
+    min-height: 360px;
+}
+
+nz-footer {
+    text-align: center;
+}
+
+::ng-deep .ant-layout-sider-collapsed {
+    flex: 0 0 150px !important;
+    max-width: 150px !important;
+    min-width: 150px !important;
+    width: 150px !important;
+}

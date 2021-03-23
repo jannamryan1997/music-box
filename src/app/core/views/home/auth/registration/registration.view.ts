@@ -64,7 +64,8 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
 
             },
                 err => {
-                    this.errorMessage = err.errorMessage;
+                    this.errorMessage = err.message;
+                    console.log(err);
                 }
             );
     }

@@ -1,5 +1,5 @@
 <nz-layout>
-    <nz-header [class.isAlternative]="isAlternative">
+    <nz-header [style]="{'background':isAlternativeBackground}">
         <div class="response-header-content" style="display: none;">
             <i nz-icon nzType="bars" nzTheme="outline" (click)="onClickShowManu()"></i>
         </div>
@@ -22,7 +22,7 @@
             </div>
         </div>
     </nz-header>
-    <nz-content [class.isAlternative]="isAlternative">
+    <nz-content [style]="{'background':isAlternativeBackground}">
         <router-outlet></router-outlet>
     </nz-content>
     <!-- <nz-footer></nz-footer> -->

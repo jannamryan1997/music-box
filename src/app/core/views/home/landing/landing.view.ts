@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { IsAlternativeService } from 'src/app/core/services/isAlternative.service';
 
@@ -17,7 +18,7 @@ export class LandingViewComponent implements OnInit, OnDestroy {
         this._isAlternativeService.getisAlternative()
             .subscribe((data) => {
                 this.isAlternative = data;
-                console.log(this.isAlternative);
+                console.log(this.isAlternative,'------------');
 
             });
     }
