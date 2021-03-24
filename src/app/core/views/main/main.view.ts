@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-main',
@@ -8,7 +9,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 export class MainViewComponent implements OnInit, OnDestroy {
     public isCollapsed = false;
-    constructor() { }
+    public isAlternativeBackground: string;
+    constructor(private _cookieService: CookieService) {
+        this.isAlternativeBackground = '#' + this._cookieService.get('isAlternativeBackground');
+        console.log(this.isAlternativeBackground);
+    }
 
     ngOnInit(): void { }
 

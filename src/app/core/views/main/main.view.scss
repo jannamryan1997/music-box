@@ -10,21 +10,25 @@
     color: #1890ff;
 }
 
-nz-header {
-    background: #fff;
-    padding: 0;
+nz-sider {
+    min-height: 100vh;
+    -webkit-box-shadow: 0px 10px 20px 0px rgb(50 50 50 / 52%);
 }
 
-nz-content {}
+nz-header {
+    padding: 0;
+    -webkit-box-shadow: 0px 10px 20px 0px rgb(50 50 50 / 52%);
+    z-index: 1;
+}
 
-.inner-content {
+nz-content {
     padding: 24px;
-    background: #fff;
-    min-height: 360px;
 }
 
 nz-footer {
     text-align: center;
+    -webkit-box-shadow: 0px 10px 20px 0px rgb(50 50 50 / 52%);
+    color: #00c0fa;
 }
 
 ::ng-deep .ant-layout-sider-collapsed {
