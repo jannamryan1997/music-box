@@ -1,28 +1,43 @@
 <div>
+    <app-mat-spinner *ngIf="loading"></app-mat-spinner>
     <header>
         <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" [style]="{width:'300px',margin:'10px'}">
-            <input type="text" nz-input placeholder="input search text" />
+            <input [formControl]="searchControl" type="text" nz-input placeholder="input search text" />
         </nz-input-group>
         <ng-template #suffixIconButton>
             <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
         </ng-template>
         <button nz-button nzType="primary" [style]="{margin:'10px'}" (click)="onClickOpenAddAdminModal()"><i nz-icon nzType="plus"></i>Add Admin</button>
     </header>
-    <nz-table #basicTable [nzData]="adminDetails">
+    <!-- <nz-table #basicTable *ngFor="let item of adminDetails;let ind = index">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Address</th>
+                <th>Index</th>
+                <th>Login</th>
                 <th>Detele</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>9898</td>
-                <td>8989</td>
-                <td>89898</td>
+                <td>{{ind+1}}</td>
+                <td>{{item?.login}}</td>
                 <td><i nz-icon nzType="delete" nzTheme="outline" (click)="onClickDeleteItem()"></i></td>
+            </tr>
+        </tbody>
+    </nz-table> -->
+    <nz-table #basicTable [nzData]="adminDetails">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Login</th>
+                <th>Detele</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of adminDetails">
+                <td>{{item?.id}}</td>
+                <td>{{item?.login}}</td>
+                <td><i nz-icon nzType="delete" nzTheme="outline" (click)="onClickDeleteItem(item)"></i></td>
             </tr>
         </tbody>
     </nz-table>

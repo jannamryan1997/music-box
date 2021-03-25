@@ -12,7 +12,6 @@ export class MainViewComponent implements OnInit, OnDestroy {
     public isAlternativeBackground: string;
     constructor(private _cookieService: CookieService) {
         this.isAlternativeBackground = '#' + this._cookieService.get('isAlternativeBackground');
-        console.log(this.isAlternativeBackground);
     }
 
     ngOnInit(): void { }

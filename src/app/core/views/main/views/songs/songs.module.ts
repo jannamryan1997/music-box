@@ -2,21 +2,21 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/core/shared/shared.module';
-import { UserRoutingModule } from './user-routing.module';
-import { UserService } from './user.service';
-import { UserViewComponent } from './user.view';
+import { SongsRoutingModule } from './songs-routing.module';
+import { SongsService } from './songs.service';
+import { SongsViewComponent } from './songs.view';
 
 @NgModule({
-    declarations: [UserViewComponent],
+    declarations: [SongsViewComponent],
     imports: [
         SharedModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        UserRoutingModule
+        SongsRoutingModule
     ],
-    providers: [UserService],
+    providers: [SongsService],
     entryComponents: []
 })
 
-export class UserModule { }
+export class SongsModule { }

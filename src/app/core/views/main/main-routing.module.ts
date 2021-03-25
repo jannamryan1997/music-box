@@ -13,6 +13,14 @@ const mainRoutes: Routes = [{
             {
                 path: 'users',
                 loadChildren: () => import('./views/users/user.module').then(m => m.UserModule)
+            },
+            {
+                path: 'restaurants',
+                loadChildren: () => import('./views/restaurants/restaurants.module').then(m => m.ResataurantsModule)
+            },
+            {
+                path: 'songs',
+                loadChildren: () => import('./views/songs/songs.module').then(m => m.SongsModule)
             }
         ]
 }];

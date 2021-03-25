@@ -13,10 +13,7 @@ export class SiderComponent implements OnInit, OnDestroy {
     public menuItem: IMenuItem[] = MENU_ITEM;
     constructor() { }
 
-    ngOnInit(): void {
-        console.log(this.menuItem);
-
-    }
+    ngOnInit(): void {}
 
     ngOnDestroy(): void { }
 }

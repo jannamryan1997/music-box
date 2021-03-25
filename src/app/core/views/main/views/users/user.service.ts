@@ -1,9 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
+import { IUser } from 'src/app/core/moduls/user';
 
 @Injectable()
 
 export class UserService {
 
     constructor(private _httpClient: HttpClient) { }
+
+    public getUser(page: number, query: string): Observable<PaginatorResponse<IUser[]>> {
+        let params: HttpParams = new HttpParams();
+        params = params.set('page', String(page));
+        params = params.set('query', query);
+        return this._httpClient.get<PaginatorResponse<IUser[]>>('user/', { params });
+    }
 }

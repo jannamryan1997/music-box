@@ -3,6 +3,11 @@ import { Subject } from 'rxjs';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AddAdminModalComponent } from './modals';
 import { ConfirmDeleteModalComponent } from 'src/app/core/globals/modals';
+import { AdminService } from './admin.service';
+import { finalize, takeUntil } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
+import { IAdminDedatils } from 'src/app/core/moduls/admin';
 
 @Component({
     selector: 'app-admin',
@@ -13,11 +18,43 @@ import { ConfirmDeleteModalComponent } from 'src/app/core/globals/modals';
 export class AdminViewComponent implements OnInit, OnDestroy {
 
     private _unsubscribe$ = new Subject<void>();
-    public adminDetails: [] = [];
     public loading = false;
-    constructor(private _nzModalService: NzModalService) { }
+    public page = 1;
+    public countAdmins!: number;
+    public searchControl: FormControl = new FormControl('');
+    public adminDetails: IAdminDedatils[] = [];
+    public messageError!: string;
+    constructor(
+        private _nzModalService: NzModalService,
+        private _adminService: AdminService) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this._getAdmins();
+    }
+
+
+    private _getAdmins(): void {
+        const searchValue: string = this.searchControl.value;
+        const page: number = this.page;
+        this.loading = true;
+        this._adminService.getAdmins(page, searchValue).
+            pipe(takeUntil(this._unsubscribe$),
+                finalize(() => {
+                    this.loading = false;
+                })
+            )
+            .subscribe((data: PaginatorResponse<IAdminDedatils[]>) => {
+                console.log(data);
+                if (data.count != 0) {
+                    this.countAdmins = data.count;
+                    this.adminDetails = data.data;
+                } else {
+                    this.countAdmins = data.count;
+                    this.adminDetails = data.data;
+                }
+
+            });
+    }
 
     public onClickOpenAddAdminModal(): void {
         const dialogRef = this._nzModalService.create({
@@ -25,14 +62,40 @@ export class AdminViewComponent implements OnInit, OnDestroy {
             nzContent: AddAdminModalComponent,
             nzFooter: 'false',
         });
+        dialogRef.afterClose.subscribe((data) => {
+            if (data === 'addAdmin') {
+                this._getAdmins();
+            }
+        });
     }
 
-    public onClickDeleteItem(): void {
+    public onClickDeleteItem(adminData: IAdminDedatils): void {
         const dialogRef = this._nzModalService.create({
             nzTitle: 'Confirm Delete',
             nzContent: ConfirmDeleteModalComponent,
             nzFooter: 'false'
         });
+        dialogRef.afterClose.subscribe((data) => {
+            if (data === 'confirm-delete') {
+                this._deleteAdminItem(adminData.id);
+            }
+        });
+    }
+
+    private _deleteAdminItem(id: number): void {
+        this._adminService.deleteAdmin(id)
+            .pipe(takeUntil(this._unsubscribe$),
+                finalize(() => {
+
+                })
+            )
+            .subscribe((data) => {
+                this._getAdmins();
+            },
+                err => {
+                    this.messageError = err.message;
+                }
+            );
     }
 
     ngOnDestroy(): void {

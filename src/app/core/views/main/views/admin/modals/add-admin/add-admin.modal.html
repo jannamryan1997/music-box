@@ -1,10 +1,11 @@
 <div class="form-main">
+    <!-- <p class="error-text">{{errorMessage}}</p> -->
     <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
         <img src="assets/images/logo.png" style="width: 130px;margin: 20px 0;">
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Email!">
                 <nz-input-group nzPrefixIcon="user">
-                    <input type="text" nz-input formControlName="email" placeholder="Email" />
+                    <input type="text" nz-input formControlName="login" placeholder="Email" />
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
@@ -15,6 +16,8 @@
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
-        <button nz-button class="form-button login-form-margin form-type" [nzType]="'primary'" [disabled]="validateForm.invalid">Add Admin</button>
+        <button nz-button class="form-button login-form-margin form-type" [nzType]="'primary'" [disabled]="validateForm.invalid || loading" (click)="onClickAddAdmin()">Add Admin
+            <app-loading *ngIf="loading"></app-loading>
+        </button>
     </form>
 </div>
