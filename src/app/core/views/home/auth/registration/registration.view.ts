@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { pipe, Subject } from 'rxjs';
+import {  Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { IRegistration } from 'src/app/core/moduls/registration';
 import { RegistrationService } from './registration.service';
@@ -21,7 +20,6 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
     constructor(
         private _fb: FormBuilder,
         private _registrationService: RegistrationService,
-        private _router: Router,
     ) { }
 
     ngOnInit(): void {
@@ -60,12 +58,9 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
                     this.loading = false;
                 }))
             .subscribe((data) => {
-                console.log(data);
-
             },
                 err => {
                     this.errorMessage = err.message;
-                    console.log(err);
                 }
             );
     }

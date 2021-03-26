@@ -11,7 +11,6 @@ export class RegistrationService {
     public registration(body: IRegistration): Observable<any> {
         let params = new HttpParams();
         params = params.set('authorization', 'false');
-        console.log(params);
         return this._httpClient.post<any>('admin/add', body);
     }
 }

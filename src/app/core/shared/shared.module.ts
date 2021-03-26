@@ -10,7 +10,6 @@ import { ConfirmDeleteModalComponent } from '../globals/modals';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { LoadingComponent, MatSpinnerComponent } from '../globals/components';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
-
 @NgModule({
     declarations: [ConfirmDeleteModalComponent, LoadingComponent, MatSpinnerComponent],
     imports: [
@@ -21,7 +20,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
         NzModalModule,
         NzFormModule,
         NzSpinModule,
-        NzAlertModule
+        NzAlertModule,
     ],
     providers: [],
     entryComponents: [ConfirmDeleteModalComponent],
@@ -36,7 +35,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
         NzAlertModule,
         ConfirmDeleteModalComponent,
         LoadingComponent,
-        MatSpinnerComponent
+        MatSpinnerComponent,
     ]
 })
 

@@ -18,8 +18,6 @@ export class LandingViewComponent implements OnInit, OnDestroy {
         this._isAlternativeService.getisAlternative()
             .subscribe((data) => {
                 this.isAlternative = data;
-                console.log(this.isAlternative,'------------');
-
             });
     }
 

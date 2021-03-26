@@ -2,7 +2,7 @@
     <img class="logo-img" src="assets/images/logo.png">
 </div>
 <ul nz-menu nzTheme="dark" nzMode="inline">
-    <li nz-menu-item *ngFor="let item of menuItem" [routerLink]="item?.path" routerLinkActive="activatedRoute">
+    <li nz-menu-item *ngFor="let item of menuItem" [routerLink]="item?.path" routerLinkActive="activatedRoute" (click)="logOut(item)">
         <i nz-icon nzType="{{item?.icon}}"></i>
         <span>{{item?.label}}</span>
     </li>

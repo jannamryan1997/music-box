@@ -29,14 +29,24 @@ export class AdminViewComponent implements OnInit, OnDestroy {
         private _adminService: AdminService) { }
 
     ngOnInit(): void {
+        this.searchControl.valueChanges.subscribe((data) => {
+            if (data.length >= 3) {
+                this._getAdmins(false);
+            }
+            else {
+                this._getAdmins();
+            }
+        });
         this._getAdmins();
     }
 
 
-    private _getAdmins(): void {
+    private _getAdmins(isShowLoading = true): void {
+        if (isShowLoading) {
+            this.loading = true;
+        }
         const searchValue: string = this.searchControl.value;
         const page: number = this.page;
-        this.loading = true;
         this._adminService.getAdmins(page, searchValue).
             pipe(takeUntil(this._unsubscribe$),
                 finalize(() => {
@@ -44,14 +54,8 @@ export class AdminViewComponent implements OnInit, OnDestroy {
                 })
             )
             .subscribe((data: PaginatorResponse<IAdminDedatils[]>) => {
-                console.log(data);
-                if (data.count != 0) {
                     this.countAdmins = data.count;
                     this.adminDetails = data.data;
-                } else {
-                    this.countAdmins = data.count;
-                    this.adminDetails = data.data;
-                }
 
             });
     }

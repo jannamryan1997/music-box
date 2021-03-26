@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
@@ -23,7 +24,9 @@ export class LoginViewComponent implements OnInit, OnDestroy {
     constructor(
         private _fb: FormBuilder,
         private _loginService: LoginService,
-        private _cookieService: CookieService) { }
+        private _cookieService: CookieService,
+        private _router: Router
+        ) { }
 
     ngOnInit(): void {
         this._initForm();
@@ -59,9 +62,9 @@ export class LoginViewComponent implements OnInit, OnDestroy {
                     this.loading = false;
                 }))
             .subscribe((data: IAuthorization) => {
-                console.log(data);
                 this._cookieService.set('accessToken', data.accessToken);
                 this._cookieService.set('refreshToken', data.refreshToken);
+                this._router.navigate(['/admins']);
 
             },
                 err => {

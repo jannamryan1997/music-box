@@ -55,14 +55,11 @@ export class AddAdminModalComponent implements OnInit, OnDestroy {
                 })
             )
             .subscribe((data) => {
-                console.log(data);
                 if (data) {
                     this._nzdal.destroy('addAdmin');
                 }
             },
                 err => {
-                    console.log(err);
-                    
                     this.errorMessage = err.message;
                 }
             );

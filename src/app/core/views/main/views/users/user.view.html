@@ -1,1 +1,33 @@
-<p>user</p>
+<div>
+    <app-mat-spinner *ngIf="loading"></app-mat-spinner>
+    <header>
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" [style]="{width:'300px',margin:'10px'}">
+            <input [formControl]="searchControl" type="text" nz-input placeholder="input search text" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+    </header>
+    <nz-table #basicTable [nzData]="userDetails">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Email</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>PhoneNumber</th>
+                <th>Detele</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of userDetails">
+                <td>{{item?.id}}</td>
+                <td>{{item?.email}}</td>
+                <td>{{item?.firstName}}</td>
+                <td>{{item?.lastName}}</td>
+                <td>{{item?.phoneNumber}}</td>
+                <td><i nz-icon nzType="delete" nzTheme="outline" (click)="onClickDeleteItem(item)"></i></td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

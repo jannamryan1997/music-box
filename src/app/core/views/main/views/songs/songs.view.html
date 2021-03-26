@@ -1,0 +1,41 @@
+<div>
+    <app-mat-spinner *ngIf="loading"></app-mat-spinner>
+    <header>
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" [style]="{width:'300px',margin:'10px'}">
+            <input [formControl]="searchControl" type="text" nz-input placeholder="input search text" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+        <button nz-button nzType="primary" [style]="{margin:'10px'}" (click)="onClickAddSongModal()"><i nz-icon nzType="plus"></i>Add Songs</button>
+    </header>
+    <nz-table #basicTable [nzData]="songsDetails">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Restaurant Name</th>
+                <th>Start Second</th>
+                <th>End Second</th>
+                <th>status</th>
+                <th>URL</th>
+                <th>Show</th>
+                <th>Detele</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of songsDetails;let ind=index">
+                <td>{{ind+1}}</td>
+                <td>{{item?.name}}</td>
+                <td>{{item?.restaurantName}}</td>
+                <td>{{item?.startSecond}}</td>
+                <td>{{item?.endSecond}}</td>
+                <td>{{item?.status}}</td>
+                <td>{{item?.url}}</td>
+                <td><i nz-icon nzType="eye" nzTheme="outline" (click)="onClickOpenViewVideoModal(item)"></i></td>
+                <td><i nz-icon nzType="delete" nzTheme="outline" (click)="onClickDeleteItem(item)"></i></td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

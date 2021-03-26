@@ -18,7 +18,9 @@ import { IsAlternativeService } from './core/services/isAlternative.service';
 import { CookieModule } from 'ngx-cookie';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
+
 registerLocaleData(en);
+
 
 @NgModule({
   declarations: [
@@ -50,3 +52,4 @@ registerLocaleData(en);
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
