@@ -6,6 +6,7 @@ import { AddSongModalComponent, ViewVideoModalComponent } from './modals';
 import { SongsRoutingModule } from './songs-routing.module';
 import { SongsService } from './songs.service';
 import { SongsViewComponent } from './songs.view';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
     declarations: [SongsViewComponent, AddSongModalComponent, ViewVideoModalComponent],
@@ -14,7 +15,8 @@ import { SongsViewComponent } from './songs.view';
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        SongsRoutingModule
+        SongsRoutingModule,
+        DropdownModule
     ],
     providers: [SongsService],
     entryComponents: [AddSongModalComponent, ViewVideoModalComponent]

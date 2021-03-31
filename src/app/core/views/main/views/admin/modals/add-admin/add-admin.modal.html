@@ -1,7 +1,8 @@
 <div class="form-main">
-    <!-- <p class="error-text">{{errorMessage}}</p> -->
+
     <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
         <img src="assets/images/logo.png" style="width: 130px;margin: 20px 0;">
+        <p class="error-text">{{errorMessage}}</p>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Email!">
                 <nz-input-group nzPrefixIcon="user">

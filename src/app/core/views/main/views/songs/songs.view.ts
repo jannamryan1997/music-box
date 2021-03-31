@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { ConfirmDeleteModalComponent } from 'src/app/core/globals/modals';
@@ -99,9 +99,10 @@ export class SongsViewComponent implements OnInit, OnDestroy {
             nzTitle: 'View Video',
             nzContent: ViewVideoModalComponent,
             nzFooter: 'false',
-            nzComponentParams: { url: item.url }
+            nzComponentParams: { item }
         });
     }
+
 
     ngOnDestroy(): void {
         this._unsubscribe$.next();

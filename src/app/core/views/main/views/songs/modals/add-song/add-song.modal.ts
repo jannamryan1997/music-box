@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
+import { IGenres, IGenresDetails, ISongDetails } from 'src/app/core/moduls/songs';
+import { SongsService } from '../../songs.service';
 
 @Component({
     selector: 'app-add-song',
@@ -14,11 +18,16 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
     public validateForm!: FormGroup;
     public loading = false;
     public errorMessage!: string;
+    public generedDetail: IGenresDetails[] = [];
 
-    constructor(private _fb: FormBuilder) { }
+    constructor(
+        private _fb: FormBuilder,
+        private _songsService: SongsService,
+        private _NzModalRef: NzModalRef) { }
 
     ngOnInit(): void {
         this._initForm();
+        this._getGeneres();
     }
 
     private _initForm(): void {
@@ -27,14 +36,55 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
             price: ['', Validators.required],
             url: ['', Validators.required],
             startSecond: ['', Validators.required],
-            endSecond: ['', Validators.required]
+            endSecond: ['', Validators.required],
+            genered: ['', Validators.required]
         });
+    }
+
+    private _getGeneres(): void {
+        this._songsService.getSongGenres()
+            .pipe(takeUntil(this._unsubscribe$),
+                finalize(() => { })
+            )
+            .subscribe((data: IGenres) => {
+                this.generedDetail = data.genres;
+                console.log(this.generedDetail);
+
+            });
     }
     public submitForm(): void {
         for (const i in this.validateForm.controls) {
             this.validateForm.controls[i].markAsDirty();
             this.validateForm.controls[i].updateValueAndValidity();
         }
+    }
+    public addSongs(): void {
+        this.loading = true;
+        const { name, url } = this.validateForm.value;
+        const sondData: ISongDetails = {
+            name,
+            url,
+            price: Number(this.validateForm.value.price),
+            startSecond: Number(this.validateForm.value.startSecond),
+            endSecond: Number(this.validateForm.value.endSecond),
+            genreId: Number(this.validateForm.value.genered.id),
+            restaurantId: 1
+        };
+        this._songsService.addSong(sondData)
+            .pipe(takeUntil(this._unsubscribe$),
+                finalize(() => {
+                    this.loading = false;
+                })
+            )
+            .subscribe((data) => {
+                console.log(data);
+                this._NzModalRef.close('Add Song');
+
+            },
+            err =>{
+                this.errorMessage = err.message;
+            }
+            );
     }
     ngOnDestroy(): void {
         this._unsubscribe$.next();

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
 import { EmptyResponse } from 'src/app/core/moduls/authorization';
-import { ISongs } from 'src/app/core/moduls/songs';
+import { IGenres, ISongDetails, ISongs } from 'src/app/core/moduls/songs';
 
 
 @Injectable()
@@ -22,7 +22,11 @@ export class SongsService {
     public deleteSongItem(id: number): Observable<EmptyResponse> {
         return this._httpClient.delete<EmptyResponse>(`song/${id}`);
     }
-    public addSong(data: any): Observable<any> {
+    public addSong(data: ISongDetails): Observable<any> {
         return this._httpClient.post('song/add', data);
+    }
+
+    public getSongGenres(): Observable<IGenres> {
+        return this._httpClient.get<IGenres>('song/genres');
     }
 }

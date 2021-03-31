@@ -1,6 +1,15 @@
 <div class="form-main">
     <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
+
         <img src="assets/images/pngfuel.com.png" style="width: 130px;margin: 20px 0;">
+        <p>{{errorMessage}}</p>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Genered!">
+                <nz-input-group nzPrefixIcon="">
+                    <p-dropdown [options]="generedDetail" optionLabel="name" placeholder="Genered Detail" formControlName="genered"></p-dropdown>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Name!">
                 <nz-input-group nzPrefixIcon="user">
@@ -10,7 +19,7 @@
         </nz-form-item>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Price!">
-                <nz-input-group nzPrefixIcon="lock">
+                <nz-input-group nzPrefixIcon="money-collect">
                     <input type="text" nz-input formControlName="price" placeholder="Price" />
                 </nz-input-group>
             </nz-form-control>
@@ -18,28 +27,26 @@
 
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Url!">
-                <nz-input-group nzPrefixIcon="lock">
+                <nz-input-group nzPrefixIcon="youtube">
                     <input type="text" nz-input formControlName="url" placeholder="url" />
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Start Second!">
-                <nz-input-group nzPrefixIcon="lock">
+                <nz-input-group nzPrefixIcon="hourglass">
                     <input type="text" nz-input formControlName="startSecond" placeholder="Start Second" />
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your End Second!">
-                <nz-input-group nzPrefixIcon="lock">
+                <nz-input-group nzPrefixIcon="hourglass">
                     <input type="text" nz-input formControlName="endSecond" placeholder="End Second" />
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
-
-
-        <button nz-button class="form-button login-form-margin form-type" [nzType]="'primary'" [disabled]="validateForm.invalid || loading">Add Song
+        <button nz-button class="form-button login-form-margin form-type" [nzType]="'primary'" [disabled]="validateForm.invalid || loading" (click)="addSongs()">Add Song
                 <app-loading *ngIf="loading"></app-loading>
             </button>
     </form>

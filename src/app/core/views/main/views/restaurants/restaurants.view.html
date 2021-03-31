@@ -1,0 +1,37 @@
+<div>
+    <app-mat-spinner *ngIf="loading"></app-mat-spinner>
+    <header>
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" [style]="{width:'300px',margin:'10px'}">
+            <input [formControl]="searchControl" type="text" nz-input placeholder="input search text" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+    </header>
+    <nz-table #basicTable [nzData]="restaurantsDetails">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>IsAdmin Verified</th>
+                <th>Address</th>
+                <th> Name</th>
+                <th>Phone Number</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of restaurantsDetails;let ind=index">
+                <td>{{ind+1}}</td>
+                <td>{{item?.isAdminVerified}}</td>
+                <td>{{item?.address}}</td>
+                <td>{{item?.name}}</td>
+                <td>{{item?.phoneNumber}}</td>
+                <td>{{item?.latitude}}</td>
+                <td>{{item?.longitude}}</td>
+                <td><i nz-icon nzType="delete" nzTheme="outline" (click)="onClickDeleteItem(item)"></i></td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

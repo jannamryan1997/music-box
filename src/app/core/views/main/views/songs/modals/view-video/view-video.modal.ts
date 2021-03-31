@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ISongs } from 'src/app/core/moduls/songs';
 
 @Component({
     selector: 'app-view-video',
@@ -9,20 +10,12 @@ import { Subject } from 'rxjs';
 
 export class ViewVideoModalComponent implements OnInit, OnDestroy {
     private _unsubscribe$ = new Subject<void>();
-    player: any;
+    @Input() item!: ISongs;
 
-    @Input() url!: string;
-    public videoSources: any;
+    constructor() {}
 
-    constructor() {
-        // this.videoSources = [{
-        //     src: this.url,
-        //     provider: 'youtube',
-        // }];
+    ngOnInit(): void {
     }
-
-    ngOnInit(): void { }
-
 
 
     ngOnDestroy(): void {
