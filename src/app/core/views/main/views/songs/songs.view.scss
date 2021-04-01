@@ -1,0 +1,7 @@
+::ng-deep {
+    .ant-table-content {
+        overflow: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+}

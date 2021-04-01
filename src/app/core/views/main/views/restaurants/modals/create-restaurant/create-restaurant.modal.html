@@ -1,0 +1,36 @@
+<div class="form-main">
+
+    <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
+        <img src="assets/images/logo.png" style="width: 130px;margin: 20px 0;">
+        <p class="error-text">{{errorMessage}}</p>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your isAdminVerified!">
+                <label nz-checkbox formControlName="isAdmin_verified">IsAdminVerified</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Name!">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input formControlName="name" placeholder="Name" [disabled]="disableInput" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Address!">
+                <nz-input-group nzPrefixIcon="aim">
+                    <input type="text" nz-input formControlName="address" placeholder="Address" [disabled]="disableInput" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Phone Number!">
+                <nz-input-group nzPrefixIcon="phone">
+                    <input type="text" nz-input formControlName="phone_number" placeholder="Phone Number" [disabled]="disableInput" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <button nz-button class="form-button login-form-margin form-type" [nzType]="'primary'" [disabled]="validateForm.invalid || loading" (click)="onClickCreateRestaurnat()">Create Restaurant
+            <app-loading *ngIf="loading"></app-loading>
+        </button>
+    </form>
+</div>

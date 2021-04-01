@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
+import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
+import { IResataurants } from 'src/app/core/moduls/restaurants';
 import { IGenres, IGenresDetails, ISongDetails } from 'src/app/core/moduls/songs';
 import { SongsService } from '../../songs.service';
 
@@ -19,6 +21,7 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
     public loading = false;
     public errorMessage!: string;
     public generedDetail: IGenresDetails[] = [];
+    public restaurantDetail: IResataurants[] = [];
 
     constructor(
         private _fb: FormBuilder,
@@ -37,7 +40,7 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
             url: ['', Validators.required],
             startSecond: ['', Validators.required],
             endSecond: ['', Validators.required],
-            genered: ['', Validators.required]
+            genered: ['', Validators.required],
         });
     }
 
@@ -48,10 +51,25 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
             )
             .subscribe((data: IGenres) => {
                 this.generedDetail = data.genres;
-                console.log(this.generedDetail);
+                console.log(      this.generedDetail);
+                
 
             });
     }
+    private _getRestaurants(): void {
+        this._songsService.getRestaurant(1, '')
+            .pipe(takeUntil(this._unsubscribe$),
+                finalize(() => {
+                    this.loading = false;
+                })
+            )
+            .subscribe((data: PaginatorResponse<IResataurants[]>) => {
+                this.restaurantDetail = data.data;
+                console.log(this.restaurantDetail);
+            });
+    }
+
+
     public submitForm(): void {
         for (const i in this.validateForm.controls) {
             this.validateForm.controls[i].markAsDirty();
@@ -81,9 +99,9 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
                 this._NzModalRef.close('Add Song');
 
             },
-            err =>{
-                this.errorMessage = err.message;
-            }
+                err => {
+                    this.errorMessage = err.message;
+                }
             );
     }
     ngOnDestroy(): void {

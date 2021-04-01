@@ -59,6 +59,21 @@ export class AdminViewComponent implements OnInit, OnDestroy {
 
             });
     }
+    private _deleteAdminItem(id: number): void {
+        this._adminService.deleteAdmin(id)
+            .pipe(takeUntil(this._unsubscribe$),
+                finalize(() => {
+
+                })
+            )
+            .subscribe((data) => {
+                this._getAdmins();
+            },
+                err => {
+                    this.messageError = err.message;
+                }
+            );
+    }
 
     public onClickOpenAddAdminModal(): void {
         const dialogRef = this._nzModalService.create({
@@ -84,22 +99,6 @@ export class AdminViewComponent implements OnInit, OnDestroy {
                 this._deleteAdminItem(adminData.id);
             }
         });
-    }
-
-    private _deleteAdminItem(id: number): void {
-        this._adminService.deleteAdmin(id)
-            .pipe(takeUntil(this._unsubscribe$),
-                finalize(() => {
-
-                })
-            )
-            .subscribe((data) => {
-                this._getAdmins();
-            },
-                err => {
-                    this.messageError = err.message;
-                }
-            );
     }
 
     ngOnDestroy(): void {

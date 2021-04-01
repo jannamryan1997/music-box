@@ -18,18 +18,20 @@
                 <th>Phone Number</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of restaurantsDetails;let ind=index">
                 <td>{{ind+1}}</td>
-                <td>{{item?.isAdminVerified}}</td>
+                <label nz-checkbox [ngModel]="item?.isAdminVerified" [nzDisabled]="true"></label>
                 <td>{{item?.address}}</td>
                 <td>{{item?.name}}</td>
                 <td>{{item?.phoneNumber}}</td>
                 <td>{{item?.latitude}}</td>
                 <td>{{item?.longitude}}</td>
+                <td><i nz-icon nzType="edit" nzTheme="outline" (click)="onClickOpenRestaurantModal(item)"></i></td>
                 <td><i nz-icon nzType="delete" nzTheme="outline" (click)="onClickDeleteItem(item)"></i></td>
             </tr>
         </tbody>

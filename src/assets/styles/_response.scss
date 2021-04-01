@@ -15,6 +15,10 @@
         display: block !important;
     }
     nz-content {
-        height: calc(100vh - 25px) !important;
+        min-height: calc(100vh - 25px) !important;
+        max-height: fit-content !important;
+    }
+    nz-sider {
+        display: none !important;
     }
 }

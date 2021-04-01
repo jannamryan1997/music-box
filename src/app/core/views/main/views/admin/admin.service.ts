@@ -17,8 +17,8 @@ export class AdminService {
         return this._httpClient.get<PaginatorResponse<IAdminDedatils[]>>('admin/', { params });
     }
 
-    public addAdmin(body: IAdmin): Observable<any> {
-        return this._httpClient.post<any>('admin/add', body);
+    public addAdmin(body: IAdmin): Observable<EmptyResponse> {
+        return this._httpClient.post<EmptyResponse>('admin/add', body);
     }
 
     public deleteAdmin(id: number): Observable<EmptyResponse> {

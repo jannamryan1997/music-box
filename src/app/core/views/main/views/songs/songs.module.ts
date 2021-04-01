@@ -7,7 +7,7 @@ import { SongsRoutingModule } from './songs-routing.module';
 import { SongsService } from './songs.service';
 import { SongsViewComponent } from './songs.view';
 import {DropdownModule} from 'primeng/dropdown';
-
+import { YouTubePlayerModule } from '@angular/youtube-player';
 @NgModule({
     declarations: [SongsViewComponent, AddSongModalComponent, ViewVideoModalComponent],
     imports: [
@@ -16,7 +16,8 @@ import {DropdownModule} from 'primeng/dropdown';
         ReactiveFormsModule,
         FormsModule,
         SongsRoutingModule,
-        DropdownModule
+        DropdownModule,
+        YouTubePlayerModule
     ],
     providers: [SongsService],
     entryComponents: [AddSongModalComponent, ViewVideoModalComponent]

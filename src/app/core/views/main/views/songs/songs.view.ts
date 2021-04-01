@@ -8,6 +8,7 @@ import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-respons
 import { ISongs } from 'src/app/core/moduls/songs';
 import { AddSongModalComponent, ViewVideoModalComponent } from './modals';
 import { SongsService } from './songs.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-songs',
@@ -101,6 +102,11 @@ export class SongsViewComponent implements OnInit, OnDestroy {
             nzFooter: 'false',
             nzComponentParams: { item }
         });
+    }
+
+    public paginate($event: PageEvent): void {
+        this.page = $event.pageIndex + 1;
+        this._getSongs();
     }
 
 
