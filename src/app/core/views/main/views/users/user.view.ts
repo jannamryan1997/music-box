@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
@@ -86,6 +87,11 @@ export class UserViewComponent implements OnInit, OnDestroy {
                     this.errorMessage = err.message;
                 }
             );
+    }
+
+    public paginate($event: PageEvent): void {
+        this.page = $event.pageIndex + 1;
+        this._getUser();
     }
 
     ngOnDestroy(): void {

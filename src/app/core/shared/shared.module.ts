@@ -8,12 +8,16 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ConfirmDeleteModalComponent } from '../globals/modals';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { LoadingComponent, MatSpinnerComponent } from '../globals/components';
+import { LoadingComponent, MatSpinnerComponent} from '../globals/components';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
-    declarations: [ConfirmDeleteModalComponent, LoadingComponent, MatSpinnerComponent],
+    declarations: [
+        ConfirmDeleteModalComponent,
+        LoadingComponent,
+        MatSpinnerComponent,
+   ],
     imports: [
         NzIconModule,
         NzInputModule,
@@ -39,7 +43,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         ConfirmDeleteModalComponent,
         LoadingComponent,
         MatSpinnerComponent,
-        MatPaginatorModule
+        MatPaginatorModule,
     ]
 })
 

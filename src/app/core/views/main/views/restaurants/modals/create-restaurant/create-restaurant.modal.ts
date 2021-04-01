@@ -60,7 +60,6 @@ export class CreateResataurantModalComponent implements OnInit, OnDestroy {
                 })
             )
             .subscribe((data) => {
-                console.log(data);
                 this._NzModalRef.close('create restaurant');
 
             },

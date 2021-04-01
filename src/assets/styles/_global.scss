@@ -46,6 +46,16 @@ body {
     }
 }
 
+.details-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 100vh;
+    height: calc(100vh - 250px);
+    font-size: 25px;
+    font-weight: bold;
+}
+
 nz-table {
     margin: 20px 0;
 }

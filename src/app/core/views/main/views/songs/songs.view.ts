@@ -54,8 +54,6 @@ export class SongsViewComponent implements OnInit, OnDestroy {
             .subscribe((data: PaginatorResponse<ISongs[]>) => {
                 this.countSong = data.count;
                 this.songsDetails = data.data;
-                console.log(this.songsDetails);
-
             });
 
     }
@@ -108,6 +106,7 @@ export class SongsViewComponent implements OnInit, OnDestroy {
         this.page = $event.pageIndex + 1;
         this._getSongs();
     }
+
 
 
     ngOnDestroy(): void {

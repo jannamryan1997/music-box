@@ -4,4 +4,10 @@
         display: flex !important;
         flex-direction: column !important;
     }
+    .nz-disable-td {
+        display: none !important;
+    }
+    .mat-paginator-icon {
+        color: #40a9ff !important;
+    }
 }

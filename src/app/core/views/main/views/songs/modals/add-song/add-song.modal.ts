@@ -51,8 +51,6 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
             )
             .subscribe((data: IGenres) => {
                 this.generedDetail = data.genres;
-                console.log(      this.generedDetail);
-                
 
             });
     }
@@ -65,7 +63,6 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
             )
             .subscribe((data: PaginatorResponse<IResataurants[]>) => {
                 this.restaurantDetail = data.data;
-                console.log(this.restaurantDetail);
             });
     }
 
@@ -86,7 +83,7 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
             startSecond: Number(this.validateForm.value.startSecond),
             endSecond: Number(this.validateForm.value.endSecond),
             genreId: Number(this.validateForm.value.genered.id),
-            restaurantId: 1
+             restaurantId: 1
         };
         this._songsService.addSong(sondData)
             .pipe(takeUntil(this._unsubscribe$),
@@ -95,7 +92,6 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
                 })
             )
             .subscribe((data) => {
-                console.log(data);
                 this._NzModalRef.close('Add Song');
 
             },

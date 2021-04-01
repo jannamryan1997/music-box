@@ -8,6 +8,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
 import { IAdminDedatils } from 'src/app/core/moduls/admin';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-admin',
@@ -99,6 +100,10 @@ export class AdminViewComponent implements OnInit, OnDestroy {
                 this._deleteAdminItem(adminData.id);
             }
         });
+    }
+    public paginate($event: PageEvent): void {
+        this.page = $event.pageIndex + 1;
+        this._getAdmins();
     }
 
     ngOnDestroy(): void {

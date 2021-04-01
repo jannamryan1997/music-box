@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
@@ -53,7 +54,6 @@ export class RestaurantsViewComponent implements OnInit, OnDestroy {
             .subscribe((data: PaginatorResponse<IResataurants[]>) => {
                 this.countRestaurnat = data.count;
                 this.restaurantsDetails = data.data;
-                console.log(this.restaurantsDetails);
 
             });
 
@@ -79,8 +79,6 @@ export class RestaurantsViewComponent implements OnInit, OnDestroy {
                 finalize(() => { })
             )
             .subscribe((data) => {
-                console.log(data);
-
             },
             err => {
                 this.errorMessage = err.message;
@@ -99,6 +97,10 @@ export class RestaurantsViewComponent implements OnInit, OnDestroy {
                 this._deleteAdminItem(item.id);
             }
         });
+    }
+    public paginate($event: PageEvent): void {
+        this.page = $event.pageIndex + 1;
+        this._getRestaurants();
     }
 
     ngOnDestroy(): void {
