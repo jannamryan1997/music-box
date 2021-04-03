@@ -30,11 +30,5 @@ export class SongsService {
     public getSongGenres(): Observable<IGenres> {
         return this._httpClient.get<IGenres>('song/genres');
     }
-    public getRestaurant(page: number, query: string): Observable<PaginatorResponse<IResataurants[]>> {
-        let params: HttpParams = new HttpParams();
-            params = params.set('page', String(page));
-            params = params.set('query', query);
 
-        return this._httpClient.get<PaginatorResponse<IResataurants[]>>('restaurant/', { params });
-    }
 }

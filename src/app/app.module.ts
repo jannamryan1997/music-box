@@ -19,7 +19,6 @@ import { CookieModule } from 'ngx-cookie';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
 
-
 registerLocaleData(en);
 
 

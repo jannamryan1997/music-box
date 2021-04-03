@@ -21,7 +21,6 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
     public loading = false;
     public errorMessage!: string;
     public generedDetail: IGenresDetails[] = [];
-    public restaurantDetail: IResataurants[] = [];
 
     constructor(
         private _fb: FormBuilder,
@@ -54,18 +53,6 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
 
             });
     }
-    private _getRestaurants(): void {
-        this._songsService.getRestaurant(1, '')
-            .pipe(takeUntil(this._unsubscribe$),
-                finalize(() => {
-                    this.loading = false;
-                })
-            )
-            .subscribe((data: PaginatorResponse<IResataurants[]>) => {
-                this.restaurantDetail = data.data;
-            });
-    }
-
 
     public submitForm(): void {
         for (const i in this.validateForm.controls) {
