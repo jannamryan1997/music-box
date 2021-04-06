@@ -10,7 +10,7 @@ import { UploadFileResponse } from 'src/app/core/moduls/upload-file';
 export class RegistrationService {
     constructor(private _httpClient: HttpClient) { }
 
-    public registration(body: IRegistrationRestaurant): Observable<EmptyResponse> {
+    public registration(body: FormData): Observable<EmptyResponse> {
         let params = new HttpParams();
         params = params.set('authorization', 'false');
         return this._httpClient.post<EmptyResponse>('restaurant/add', body);

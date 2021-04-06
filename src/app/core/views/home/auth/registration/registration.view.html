@@ -2,13 +2,13 @@
     <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
         <img src="assets/images/logo.png" style="width: 130px;margin: 20px 0;">
         <p class="text-danger">{{errorMessage}}</p>
-        <!-- <div nz-col nzFlex="2" style="text-align: center;">
+        <div nz-col nzFlex="2" style="text-align: center;">
             <img nz-image width="200px" class="nz-image" height="200px" nzSrc="error" [src]="localImage" alt="" />
             <div class="add-image d-flex">
                 <input class="" type="file" id="file" name="avatar" accept=".png, .jpg, .jpeg, .pdf" (change)="handleFileSelect($event)">
                 <label class="d-flex m-auto ant-btn" style="width: 200px;margin: auto;" for="file"> <i nz-icon nzType="file-image" nzTheme="outline"></i></label>
             </div>
-        </div> -->
+        </div>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your name!">
                 <nz-input-group nzPrefixIcon="user">

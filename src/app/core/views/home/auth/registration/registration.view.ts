@@ -23,6 +23,7 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
     public loading = false;
     public errorMessage!: string;
     public localImage: any = 'assets/images/restaurant.jpg';
+    public fileName!: string;
     constructor(
         private _fb: FormBuilder,
         private _registrationService: RegistrationService,
@@ -36,13 +37,13 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
 
     private _initForm(): void {
         this.validateForm = this._fb.group({
-            name: ['', [Validators.required]],
-            address: ['', [Validators.required]],
-            phoneNumber: ['', [Validators.required]],
-            email: ['', [Validators.required, Validators.email]],
-            openTime: ['', [Validators.required]],
-            closeTime: ['', [Validators.required]],
-            password: ['', [Validators.required]]
+            name: ['1', [Validators.required]],
+            address: ['3', [Validators.required]],
+            phoneNumber: ['3', [Validators.required]],
+            email: ['3@mail.ru', [Validators.required, Validators.email]],
+            openTime: ['2', [Validators.required]],
+            closeTime: ['2', [Validators.required]],
+            password: ['2', [Validators.required]]
         });
     }
 
@@ -61,7 +62,7 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
             });
         }
         const marker = new google.maps.Marker({
-            position:  mapElement,
+            position: mapElement,
             map,
             title: 'Hello World!'
         });
@@ -80,11 +81,11 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
             if (fileList.length > 0) {
                 const file: File = fileList[0];
                 formData.append('avatar', file, file.name);
-
-                this._registrationService.uploatRestaurantProfileImage(formData)
-                    .subscribe((data: UploadFileResponse) => {
-                        this.localImage = data.url;
-                    });
+                
+                // this._registrationService.uploatRestaurantProfileImage(formData)
+                //     .subscribe((data: UploadFileResponse) => {
+                //         this.localImage = data.url;
+                //     });
             }
         }
     }
@@ -98,12 +99,15 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
     }
 
     public onClickRegistration(): void {
+
+        const formData = new FormData();
         if (this.validateForm.invalid) {
             this.validateForm.markAllAsTouched();
             return;
         }
         this.loading = true;
-        const registrationDetails: IRegistrationRestaurant = {
+
+        const registrationDetails: any = {
             name: this.validateForm.value.name,
             latitude: String(this._lat),
             longitude: String(this._lng),
@@ -113,9 +117,13 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
             openTime: +this.validateForm.value.openTime,
             closeTime: +this.validateForm.value.closeTime,
             password: this.validateForm.value.password,
-            // avatar: '',
         };
-        this._registrationService.registration(registrationDetails)
+        // tslint:disable-next-line: forin
+        for (const item in registrationDetails) {
+            formData.append(item, registrationDetails[item]);
+           
+        }
+        this._registrationService.registration(formData)
             .pipe(takeUntil(this._unsubscribe$),
                 finalize(() => {
                     this.loading = false;
@@ -133,10 +141,13 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
         const files = evt.target.files;
         const file = files[0];
         if (files && file) {
+
             const reader = new FileReader();
             reader.onload = () => {
                 const base64str = reader.result;
                 this.localImage = base64str;
+                console.log(this.localImage);
+
             };
             reader.readAsDataURL(file);
         }
