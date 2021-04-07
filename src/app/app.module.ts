@@ -18,6 +18,8 @@ import { IsAlternativeService } from './core/services/isAlternative.service';
 import { CookieModule } from 'ngx-cookie';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
+import { environment } from 'src/environments/environment';
+
 
 registerLocaleData(en);
 
@@ -46,6 +48,11 @@ registerLocaleData(en);
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,
+      multi: true
+    },
+    {
+      provide: 'FILE_URL',
+      useValue: environment.fileUrl,
       multi: true
     },
   ],

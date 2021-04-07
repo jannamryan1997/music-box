@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
-import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
-import { IResataurants } from 'src/app/core/moduls/restaurants';
 import { IGenres, IGenresDetails, ISongDetails } from 'src/app/core/moduls/songs';
 import { SongsService } from '../../songs.service';
 
@@ -17,6 +16,7 @@ import { SongsService } from '../../songs.service';
 export class AddSongModalComponent implements OnInit, OnDestroy {
 
     private _unsubscribe$ = new Subject<void>();
+    private _restaurantId!: string;
     public validateForm!: FormGroup;
     public loading = false;
     public errorMessage!: string;
@@ -25,7 +25,14 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
     constructor(
         private _fb: FormBuilder,
         private _songsService: SongsService,
-        private _NzModalRef: NzModalRef) { }
+        private _NzModalRef: NzModalRef,
+        private _cookieService: CookieService
+    ) {
+
+        if (this._cookieService.get('restaurantId')) {
+            this._restaurantId = this._cookieService.get('restaurantId');
+        }
+    }
 
     ngOnInit(): void {
         this._initForm();
@@ -70,7 +77,7 @@ export class AddSongModalComponent implements OnInit, OnDestroy {
             startSecond: Number(this.validateForm.value.startSecond),
             endSecond: Number(this.validateForm.value.endSecond),
             genreId: Number(this.validateForm.value.genered.id),
-             restaurantId: 1
+            restaurantId: +this._restaurantId
         };
         this._songsService.addSong(sondData)
             .pipe(takeUntil(this._unsubscribe$),

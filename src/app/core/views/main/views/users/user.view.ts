@@ -7,7 +7,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { ConfirmDeleteModalComponent } from 'src/app/core/globals/modals';
 import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
 import { IUser } from 'src/app/core/moduls/user';
-import { UserService } from './user.service';
+import { UsersService } from './user.service';
 
 @Component({
     selector: 'app-user',
@@ -24,7 +24,7 @@ export class UserViewComponent implements OnInit, OnDestroy {
     public userDetails: IUser[] = [];
     public loading = false;
     public errorMessage!: string;
-    constructor(private _userService: UserService, private _nzModalService: NzModalService) { }
+    constructor(private _userService: UsersService, private _nzModalService: NzModalService) { }
 
     ngOnInit(): void {
         this.searchControl.valueChanges.subscribe((data) => {

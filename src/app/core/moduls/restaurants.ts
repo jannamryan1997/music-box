@@ -8,3 +8,7 @@ export interface IResataurants {
     name: string;
     phoneNumber: string;
 }
+
+export interface IRestaurantResponse{
+    restaurantId: number;
+}

@@ -23,6 +23,9 @@
     .sm-menu {
         display: inline-block !important;
     }
+    .file-label {
+        width: 300px !important;
+    }
     nz-content {
         min-height: calc(100vh - 25px) !important;
         max-height: fit-content !important;

@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
-import { IRegistrationRestaurant } from 'src/app/core/moduls/registration';
-import { UploadFileResponse } from 'src/app/core/moduls/upload-file';
+import { IRestaurantResponse } from 'src/app/core/moduls/restaurants';
 import { RegistrationService } from './registration.service';
 
 declare const google: any;
@@ -22,12 +22,13 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
     public validateForm!: FormGroup;
     public loading = false;
     public errorMessage!: string;
-    public localImage: any = 'assets/images/restaurant.jpg';
-    public fileName!: string;
+    public localImage: any = 'assets/images/user.jpg';
+    public fileImage!: any;
     constructor(
         private _fb: FormBuilder,
         private _registrationService: RegistrationService,
         private _router: Router,
+        private _cookieService: CookieService,
     ) { }
 
     ngOnInit(): void {
@@ -37,13 +38,13 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
 
     private _initForm(): void {
         this.validateForm = this._fb.group({
-            name: ['1', [Validators.required]],
-            address: ['3', [Validators.required]],
-            phoneNumber: ['3', [Validators.required]],
-            email: ['3@mail.ru', [Validators.required, Validators.email]],
-            openTime: ['2', [Validators.required]],
-            closeTime: ['2', [Validators.required]],
-            password: ['2', [Validators.required]]
+            name: ['', [Validators.required]],
+            address: ['', [Validators.required]],
+            phoneNumber: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
+            openTime: ['', [Validators.required]],
+            closeTime: ['', [Validators.required]],
+            password: ['', [Validators.required]]
         });
     }
 
@@ -80,8 +81,8 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
             const fileList: FileList = image.target.files;
             if (fileList.length > 0) {
                 const file: File = fileList[0];
+                this.fileImage = file;
                 formData.append('avatar', file, file.name);
-                
                 // this._registrationService.uploatRestaurantProfileImage(formData)
                 //     .subscribe((data: UploadFileResponse) => {
                 //         this.localImage = data.url;
@@ -121,14 +122,15 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
         // tslint:disable-next-line: forin
         for (const item in registrationDetails) {
             formData.append(item, registrationDetails[item]);
-           
+            formData.append('avatar', this.fileImage, this.fileImage?.name);
         }
         this._registrationService.registration(formData)
             .pipe(takeUntil(this._unsubscribe$),
                 finalize(() => {
                     this.loading = false;
                 }))
-            .subscribe((data) => {
+            .subscribe((data: IRestaurantResponse) => {
+                this._cookieService.set('restaurantId', String(data.restaurantId));
                 this._router.navigate(['/login']);
             },
                 err => {
@@ -146,7 +148,6 @@ export class RegistrationViewComponent implements OnInit, OnDestroy {
             reader.onload = () => {
                 const base64str = reader.result;
                 this.localImage = base64str;
-                console.log(this.localImage);
 
             };
             reader.readAsDataURL(file);

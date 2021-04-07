@@ -7,8 +7,7 @@
         <ng-template #suffixIconButton>
             <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
         </ng-template>
-        <button nz-button nzType="primary" [style]="{margin:'10px'}" (click)="onClickAddSongModal()"><i nz-icon
-        nzType="plus"></i>Add Songs</button>
+        <button *ngIf="role==='Restaurant'" nz-button nzType="primary" [style]="{margin:'10px'}" (click)="onClickAddSongModal()"><i nz-icon nzType="plus"></i>Add Songs</button>
     </header>
     <div *ngIf="songsDetails.length>0">
         <nz-table #basicTable>

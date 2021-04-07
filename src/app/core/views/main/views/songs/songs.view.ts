@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { ConfirmDeleteModalComponent } from 'src/app/core/globals/modals';
@@ -9,6 +9,7 @@ import { ISongs } from 'src/app/core/moduls/songs';
 import { AddSongModalComponent, ViewVideoModalComponent } from './modals';
 import { SongsService } from './songs.service';
 import { PageEvent } from '@angular/material/paginator';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-songs',
@@ -24,8 +25,17 @@ export class SongsViewComponent implements OnInit, OnDestroy {
     public searchControl: FormControl = new FormControl('');
     public songsDetails: ISongs[] = [];
     public countSong!: number;
+    public role!: string;
 
-    constructor(private _songsService: SongsService, private _nzModalService: NzModalService) { }
+    constructor(
+        private _songsService: SongsService,
+        private _nzModalService: NzModalService,
+        private _cookieService: CookieService
+    ) {
+        if (this._cookieService.get('role')){
+            this.role = this._cookieService.get('role');
+        }
+    }
 
     ngOnInit(): void {
         this.searchControl.valueChanges.subscribe((data) => {

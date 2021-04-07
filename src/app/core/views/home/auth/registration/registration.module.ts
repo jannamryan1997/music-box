@@ -7,6 +7,8 @@ import { RegistrationRoutingModule } from './registration-routing.module';
 import { RegistrationViewComponent } from './registration.view';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { RegistrationService } from './registration.service';
 
 @NgModule({
@@ -17,7 +19,10 @@ import { RegistrationService } from './registration.service';
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
-        NzFormModule],
+        NzFormModule,
+        NzImageModule,
+        NzSpaceModule
+    ],
     providers: [RegistrationService],
     entryComponents: []
 })

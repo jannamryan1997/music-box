@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -7,6 +7,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { ConfirmDeleteModalComponent } from 'src/app/core/globals/modals';
 import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
 import { IResataurants } from 'src/app/core/moduls/restaurants';
+import { UserService } from 'src/app/core/services/user.service';
 import { CreateResataurantModalComponent } from './modals';
 import { ReataurantService } from './restaurants.service';
 
@@ -25,7 +26,11 @@ export class RestaurantsViewComponent implements OnInit, OnDestroy {
     public page = 1;
     public countRestaurnat!: number;
     public errorMessage!: string;
-    constructor(private _restaurantService: ReataurantService, private _nzModalService: NzModalService) { }
+    constructor(
+        private _restaurantService: ReataurantService,
+        private _nzModalService: NzModalService,
+        private _userService: UserService,
+        ) { }
 
     ngOnInit(): void {
         this.searchControl.valueChanges.subscribe((data) => {
@@ -38,7 +43,7 @@ export class RestaurantsViewComponent implements OnInit, OnDestroy {
         });
         this._getRestaurants();
     }
-
+    
     private _getRestaurants(isShowloading = true): void {
         if (isShowloading) {
             this.loading = true;
@@ -80,9 +85,9 @@ export class RestaurantsViewComponent implements OnInit, OnDestroy {
             )
             .subscribe((data) => {
             },
-            err => {
-                this.errorMessage = err.message;
-            }
+                err => {
+                    this.errorMessage = err.message;
+                }
             );
     }
 

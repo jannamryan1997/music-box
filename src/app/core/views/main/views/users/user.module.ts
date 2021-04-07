@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/core/shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
-import { UserService } from './user.service';
+import { UsersService } from './user.service';
 import { UserViewComponent } from './user.view';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { UserViewComponent } from './user.view';
         FormsModule,
         UserRoutingModule
     ],
-    providers: [UserService],
+    providers: [UsersService],
     entryComponents: []
 })
 

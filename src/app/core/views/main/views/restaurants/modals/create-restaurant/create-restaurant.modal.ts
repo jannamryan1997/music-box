@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subject } from 'rxjs';
@@ -19,7 +19,12 @@ export class CreateResataurantModalComponent implements OnInit, OnDestroy {
     public errorMessage!: string;
     public loading = false;
     public disableInput = true;
-    constructor(private _reataurantService: ReataurantService, private _fb: FormBuilder, private _NzModalRef:NzModalRef) { }
+    public localImage!: string;
+    constructor(
+        @Inject('FILE_URL') private _fileUrl: string,
+        private _reataurantService: ReataurantService,
+        private _fb: FormBuilder,
+        private _NzModalRef: NzModalRef) { }
 
     ngOnInit(): void {
         this._initForm();
@@ -42,6 +47,10 @@ export class CreateResataurantModalComponent implements OnInit, OnDestroy {
             phone_number: this.item.phoneNumber,
             isAdmin_verified: this.item.isAdminVerified,
         });
+        this.localImage = this._fileUrl + this.item.avatar;
+        if (!this.item.avatar) {
+            this.localImage = 'assets/images/logo.png';
+        }
     }
 
     public submitForm(): void {

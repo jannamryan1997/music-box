@@ -1,7 +1,7 @@
 <div class="form-main">
 
     <form nz-form [formGroup]="validateForm" class="form" (ngSubmit)="submitForm()">
-        <img src="assets/images/logo.png" style="width: 130px;margin: 20px 0;">
+        <img [src]="localImage" style="width: 200px;margin: 20px 0;height: 200px;border-radius: 50%;">
         <p class="error-text">{{errorMessage}}</p>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your isAdminVerified!">

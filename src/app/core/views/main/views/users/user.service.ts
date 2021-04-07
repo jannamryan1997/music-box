@@ -7,7 +7,7 @@ import { IUser } from 'src/app/core/moduls/user';
 
 @Injectable()
 
-export class UserService {
+export class UsersService {
 
     constructor(private _httpClient: HttpClient) { }
 

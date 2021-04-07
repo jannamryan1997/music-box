@@ -34,8 +34,8 @@ export class LoginViewComponent implements OnInit, OnDestroy {
 
     private _initForm(): void {
         this.validateForm = this._fb.group({
-            userName: ['admin@music-box.org', [Validators.required]],
-            password: ['admin', [Validators.required]],
+            userName: ['hayat@mail.ru', [Validators.required, Validators.email]],
+            password: ['Qwerty12345=', [Validators.required]],
         });
     }
 
@@ -64,11 +64,11 @@ export class LoginViewComponent implements OnInit, OnDestroy {
             .subscribe((data: IAuthorization) => {
                 this._cookieService.set('accessToken', data.accessToken);
                 this._cookieService.set('refreshToken', data.refreshToken);
-                this._router.navigate(['/admins']);
+                this._router.navigate(['/songs']);
 
             },
                 err => {
-                    this.errorMessage = err.errorMessage;
+                    this.errorMessage = err.message;
                 }
             );
 

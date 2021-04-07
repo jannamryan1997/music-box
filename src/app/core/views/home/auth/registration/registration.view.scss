@@ -6,12 +6,29 @@
     justify-content: center;
 }
 
+.file-label {
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #40a9ff;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5715;
+    padding: 10px;
+    margin: 20px;
+    background: white;
+}
+
+.message-title {
+    text-align: center;
+    color: #40a9ff;
+}
+
 #map {
     width: 400px;
     height: 300px;
     margin-bottom: 20px;
 }
 
-input[type="file"] {
-    display: none;
+nz-input-group {
+    margin: 5px;
 }
