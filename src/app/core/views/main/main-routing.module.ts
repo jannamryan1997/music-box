@@ -39,6 +39,16 @@ const mainRoutes: Routes = [{
                     enabledRoles: [EUserRole.Admin, EUserRole.SuperAdmin, EUserRole.Restaurant]
                 },
                 canActivate: [RoleGuard]
+            },
+            {
+                path: 'restaurantSong',
+                loadChildren: () => import('./views/restaurant-song/reataurant-song.module').
+                then(m => m.RestaurantSongModule),
+                data: {
+                    enabledRoles: [EUserRole.Restaurant]
+                },
+                canActivate: [RoleGuard]
+
             }
         ]
 }];

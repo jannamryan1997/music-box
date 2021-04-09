@@ -1,0 +1,36 @@
+<div class="orders">
+    <div class="orders-container">
+        <div class="yt-player">
+            <div id="player"></div>
+        </div>
+        <div class="orders-list">
+            <div class="data-table">
+                <table class="w-100">
+                    <tr>
+                        <th>Name</th>
+                        <th>Play Time</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    <tr class="bord-color" *ngFor="let playListItem of playList;trackBy: identify" [class.passedSong]="playListItem?.status == 1" [class.activeSong]="currentSong?.orderId === playListItem?.orderId">
+                        <td>
+                            <p>{{playListItem?.name}}</p>
+                        </td>
+
+                        <td>
+                            <p>{{playListItem?.playTime}}</p>
+                        </td>
+                        <td>
+                            <p>{{playListItem?.price}}</p>
+                        </td>
+                        <td>
+                            <i class="material-icons" (click)="onClickView(playListItem)">
+                                pageview
+                            </i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

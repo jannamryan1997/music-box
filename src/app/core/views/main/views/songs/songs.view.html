@@ -41,9 +41,12 @@
         </nz-table>
         <mat-paginator [length]="countSong" [pageSize]="10" (page)="paginate($event)">
         </mat-paginator>
+        <div class="details-message" *ngIf="songsDetails.length<=0">
+            <p>No Details</p>
+        </div>
     </div>
-    <div class="details-message" *ngIf="songsDetails.length<=0">
-        <p>No Details</p>
-    </div>
+
+
+
 
 </div>

@@ -59,6 +59,8 @@ export class RestaurantsViewComponent implements OnInit, OnDestroy {
             .subscribe((data: PaginatorResponse<IResataurants[]>) => {
                 this.countRestaurnat = data.count;
                 this.restaurantsDetails = data.data;
+                console.log(  this.restaurantsDetails);
+                
 
             });
 

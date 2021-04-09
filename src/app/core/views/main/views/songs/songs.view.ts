@@ -26,27 +26,26 @@ export class SongsViewComponent implements OnInit, OnDestroy {
     public songsDetails: ISongs[] = [];
     public countSong!: number;
     public role!: string;
-
     constructor(
         private _songsService: SongsService,
         private _nzModalService: NzModalService,
         private _cookieService: CookieService
     ) {
-        if (this._cookieService.get('role')){
+        if (this._cookieService.get('role')) {
             this.role = this._cookieService.get('role');
         }
     }
 
     ngOnInit(): void {
-        this.searchControl.valueChanges.subscribe((data) => {
-            if (data.length >= 3) {
-                this._getSongs(false);
-            }
-            else {
-                this._getSongs();
-            }
-        });
-        this._getSongs();
+            this.searchControl.valueChanges.subscribe((data) => {
+                if (data.length >= 3) {
+                    this._getSongs(false);
+                }
+                else {
+                    this._getSongs();
+                }
+            });
+            this._getSongs();
     }
 
     private _getSongs(isShowLoading = true): void {
@@ -67,6 +66,7 @@ export class SongsViewComponent implements OnInit, OnDestroy {
             });
 
     }
+
     private _deleteSongItem(id: number): void {
         this._songsService.deleteSongItem(id)
             .pipe(takeUntil(this._unsubscribe$),
@@ -116,8 +116,6 @@ export class SongsViewComponent implements OnInit, OnDestroy {
         this.page = $event.pageIndex + 1;
         this._getSongs();
     }
-
-
 
     ngOnDestroy(): void {
         this._unsubscribe$.next();

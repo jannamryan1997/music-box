@@ -1,0 +1,27 @@
+.orders {
+    &-container {
+        display: flex;
+        .yt-player {
+            margin-right: 10px;
+        }
+        .orders-list {
+            width: calc(100% - 640px);
+        }
+        .activeSong {
+            background-color: #ff5722;
+            border: 1px solid #ff5722 !important;
+            color: white;
+            transition: all 0.5s;
+            td {
+                p,
+                i {
+                    color: white !important;
+                }
+            }
+        }
+        .passedSong {
+            background-color: #e6e6e6;
+            transition: all 0.5s;
+        }
+    }
+}

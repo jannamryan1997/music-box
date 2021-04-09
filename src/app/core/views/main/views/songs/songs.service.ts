@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginatorResponse } from 'src/app/core/globals/modals/paginator-response';
 import { EmptyResponse } from 'src/app/core/moduls/authorization';
-import { IResataurants } from 'src/app/core/moduls/restaurants';
 import { IGenres, ISongDetails, ISongs } from 'src/app/core/moduls/songs';
 
 
